@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>register</title>
+    <link rel="stylesheet" href="./css/dangky.css" />
+  </head>
+  <body>
+    <div class="dangky">
+      <form action="" class="heading" onsubmit="">
+        <h1 class="shows">Register an account</h1>
+        <div id="form-group">
+          <input type="text" id="username" placeholder="User Name " />
+        </div>
+        <div id="form-group">
+          <input type="text" id="email" placeholder="Email Address" />
+        </div>
+        <div id="form-group">
+          <input type="password" id="password" placeholder="Password " />
+        </div>
+        <input
+          type="submit"
+          value="Submit"
+          id="form-submit"
+          placeholder="Submit"
+        />
+      </form>
+    </div>
+
+    <script>
+      const buttonSubmit = document.querySelector("#form-submit");
+      buttonSubmit.onclick = (e) => {
+        e.preventDefault();
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        const username = document.querySelector("#username").value;
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+        users = users.filter(
+          (user) => user.email === email && user.password === password
+        );
+        if (users?.length > 0) {
+          alert("tai khoan da ton tai");
+          return;
+        }
+        users.push({
+          userName: username,
+          email: email,
+          password: password,
+        });
+        localStorage.setItem("users", JSON.stringify(users));
+        window.location.href = "http://127.0.0.1:5500/dangnhap.html";
+      };
+    </script>
+  </body>
+</html>
